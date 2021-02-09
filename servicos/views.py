@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Servico
 
-# Create your views here.
+
+class ServicosListView(ListView):
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = Servico.available.all()
+
+        return queryset
+
+

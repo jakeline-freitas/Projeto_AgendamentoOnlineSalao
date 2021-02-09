@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from .models import Agendamento
 
-# Create your views here.
+
+class AgendamentoListView(ListView):
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = Agendamento.objects.all()
+
+        return queryset
