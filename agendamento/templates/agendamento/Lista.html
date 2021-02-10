@@ -1,0 +1,49 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block title %}Listar{% endblock title %}
+
+{% block conteudo %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h3>Lista de Agendamento</h3>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">Tempo</th>
+                  <th scope="col">Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for age in object_list %}
+                    <tr>
+                        <td>{{ age.data }}</td>
+                        <td>{{ age.hora }}</td>
+                        <td>{{ age.tempo }}</td>
+                        <td>
+                            {% if age.estado == 'E' %}
+                                <span class="badge badge-primary">Esperando</span>
+                            {% elif age.estado == 'A' %}
+                                <span class="badge badge-success">Agendado</span>
+                            {% else %}
+                                <span class="badge badge-danger">Cancelado</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                      <td colspan="4">Nenhum agendamento</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

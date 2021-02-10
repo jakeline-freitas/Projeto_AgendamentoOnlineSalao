@@ -7,5 +7,5 @@ urlpatterns = [
         template_name='accounts/loginForm.html'
         ), name='login'),
     path('signup/', SignUpView.as_view(), name='signup'),
-    path('logout/', auth_views.LogoutView.as_view, name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
