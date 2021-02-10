@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     #local apps
     'accounts.apps.AccountsConfig',
-    'paginas',
-    'agendamento',
-    'servicos',
+    'paginas.apps.PaginasConfig',
+    'agendamento.apps.AgendamentoConfig',
+    'servicos.apps.ServicosConfig',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

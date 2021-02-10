@@ -25,10 +25,10 @@ class AvailableManager(models.Manager):  # personalizando novo manager
 
 class Servico(models.Model):
     nome = models.CharField(max_length=255)
-    slug = AutoSlugField(unique=True, always_update=False, populate_from="name")
-    preco = models.DecimalField(max_digits=10, decimal_places=2)
-    estabelecimento = models.ForeignKey(Salao, related_name='servicos', on_delete=models.CASCADE)
-    descricao  = models.TextField(blank=True)
+    slug = AutoSlugField(unique=True, always_update=False, populate_from="nome")
+    preco = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='preço')
+    estabelecimento = models.ForeignKey(Salao, on_delete=models.CASCADE)
+    descricao  = models.TextField(blank=True, verbose_name='descrição')
     is_available = models.BooleanField(default=True)
 
     Servicos = models.Manager()  # manager padrão

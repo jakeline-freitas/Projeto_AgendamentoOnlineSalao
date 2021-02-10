@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import ServicosListView
+from .views import ServicosCreate, SalaoCreate
 
 
 urlpatterns = [
-    path("", ServicosListView.as_view(), name="list"),
+    path('cadastrarServico/', ServicosCreate.as_view(), name="cadastrarServico"),
+    path('cadastrarSalao/', SalaoCreate.as_view(), name="cadastrarSalao"),
 ]

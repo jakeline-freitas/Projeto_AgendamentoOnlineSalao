@@ -1,13 +1,20 @@
-from django.views.generic import ListView
-from .models import Servico
+from django.views.generic import CreateView, UpdateView
+from .models import Servico, Salao
+from django.urls import reverse_lazy
 
 
-class ServicosListView(ListView):
-    paginate_by = 6
+class ServicosCreate(CreateView):
+    model = Servico
+    fields = '__all__'
+    template_name = 'servicos/formularioCreate.html'
+    success_url = reverse_lazy('index')
 
-    def get_queryset(self):
-        queryset = Servico.available.all()
 
-        return queryset
+class SalaoCreate(CreateView):
+    model = Salao
+    fields = '__all__'
+    template_name = 'servicos/formularioCreate.html'
+    success_url = reverse_lazy('index')
+
 
 

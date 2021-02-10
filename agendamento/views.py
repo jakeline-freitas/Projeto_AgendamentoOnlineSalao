@@ -1,11 +1,11 @@
-from django.views.generic import ListView
+from django.views.generic import CreateView, ListView
 from .models import Agendamento
+from django.urls import reverse_lazy
 
 
-class AgendamentoListView(ListView):
-    paginate_by = 6
+class AgendamentoCreate(CreateView):
+    model = Agendamento
+    fields = '__all__'
+    template_name = 'agendamento/FormCreate.html'
+    success_url = reverse_lazy('index')
 
-    def get_queryset(self):
-        queryset = Agendamento.objects.all()
-
-        return queryset
