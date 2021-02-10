@@ -129,6 +129,9 @@ pythonenv*
 #meu ambiente
 mvenv/
 
+#static
+static/
+
 # Spyder project settings
 .spyderproject
 .spyproject
