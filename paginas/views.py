@@ -5,3 +5,5 @@ class PaginaInicial(TemplateView):
     template_name = 'paginas/index.html'
 
 
+
+

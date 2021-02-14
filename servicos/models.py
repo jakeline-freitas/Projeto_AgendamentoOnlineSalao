@@ -8,7 +8,7 @@ class Salao(models.Model):
     localizacao = models.TextField(verbose_name='Localização')
     responsavel = models.ForeignKey('accounts.User', verbose_name='Responsáveis', on_delete=models.CASCADE)
 
-    saloes = models.Manager()
+    #saloes = models.Manager()
 
     class Meta:
         verbose_name = "salão"
@@ -28,7 +28,7 @@ class Servico(models.Model):
     slug = AutoSlugField(unique=True, always_update=False, populate_from="nome")
     preco = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='preço')
     estabelecimento = models.ForeignKey(Salao, on_delete=models.CASCADE)
-    descricao  = models.TextField(blank=True, verbose_name='descrição')
+    descricao = models.TextField(blank=True, verbose_name='descrição')
     is_available = models.BooleanField(default=True)
 
     Servicos = models.Manager()  # manager padrão

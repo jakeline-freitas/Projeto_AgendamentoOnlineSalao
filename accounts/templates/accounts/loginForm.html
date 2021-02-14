@@ -4,10 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block conteudo %}
-<h3>Log in</h3>
-<hr>
+
 <div class="row">
     <div class="col-md-4 mx-auto">
+        <h3>Login</h3>
+        <hr>
         <form action="" method="post">
             {% csrf_token %}
             {{ form|crispy }}

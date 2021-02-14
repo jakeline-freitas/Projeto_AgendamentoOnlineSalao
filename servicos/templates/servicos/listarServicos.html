@@ -1,0 +1,41 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block title %}Listar{% endblock title %}
+
+{% block conteudo %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h3>Lista de Serviços</h3>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Descrição</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for servico in servico_list %}
+                    <tr>
+                        <td>{{ servico.nome }}</td>
+                        <td>{{ servico.preco }}</td>
+                        <td>{{ servico.descricao }}</td>
+
+                    </tr>
+                {% empty %}
+                    <tr>
+                      <td colspan="4">Nenhum Serviço</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

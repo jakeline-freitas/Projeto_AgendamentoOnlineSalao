@@ -3,3 +3,6 @@ body {
     overflow-x: hidden;
     overflow-wrap: break-word;
 }
+.dropdown:hover>.dropdown-menu {
+     display: block;
+}
