@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import ServicosCreate, SalaoCreate, SalaoList, ServicoList
-from .views import ServicosUpdate, SalaoUpdate
+from .views import SalaoCreate, SalaoList, ServicoList, SaloesDetail
+from .views import ServicosCreate, ServicosUpdate, SalaoUpdate
 from .views import ServicosDelete, SalaoDelete
 
 
@@ -18,5 +18,6 @@ urlpatterns = [
     path('listarSaloes/', SalaoList.as_view(), name="listarSaloes"),
     path('listarServicos/', ServicoList.as_view(), name="listarServicos"),
 
-    #path('listarServicosId/<int:pk>', ServicoList.as_view(), name="listarServicos"),
+    path('listarServicosId/<int:pk>', ServicoList.as_view(), name="listarServicosId"),
+    path('detalhesSalaoId/<int:pk>', SaloesDetail.as_view(), name="detalhesSalao"),
 ]

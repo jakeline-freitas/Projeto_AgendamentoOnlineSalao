@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView
+from django.views.generic import CreateView, DetailView
 from django.views.generic.list import ListView
 
 from .forms import AgendamentoForm
@@ -23,3 +23,17 @@ class AgendamentoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Agendamento
     template_name = 'agendamento/Lista.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AgendamentoList, self).get_context_data(*args, **kwargs)
+        print(context)
+        return context
+
+
+class AgendamentoDetail(LoginRequiredMixin, DetailView):
+    template_name = "products/detail.html"
+
+    # def get_context_data(self, *args, **kwargs):
+    # context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
+    # print(context)
+    # return context

@@ -6,7 +6,7 @@ class Salao(models.Model):
     nome = models.CharField(max_length=255)
     image = models.ImageField(upload_to="saloes/%Y/%m/%d", blank=True)
     localizacao = models.TextField(verbose_name='Localização')
-    responsavel = models.ForeignKey('accounts.User', verbose_name='Responsáveis', on_delete=models.CASCADE)
+    responsavel = models.ForeignKey('accounts.User', verbose_name='Responsável', on_delete=models.CASCADE)
 
     #saloes = models.Manager()
 
