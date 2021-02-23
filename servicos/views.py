@@ -17,14 +17,11 @@ class ServicosCreate(LoginRequiredMixin, CreateView):
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')
 
-
     def get_context_data(self, **kwargs):
         context = super(ServicosCreate, self).get_context_data(**kwargs)
         #estabelecimento = Salao.objects.filter(responsavel= self.request.user)
         #estabelecimentos = [estabelecimento for estabelecimento in Salao.objects.filter(responsavel=self.request.user)]
-
         context['form'].fields['estabelecimento'].queryset = Salao.objects.filter(responsavel= self.request.user)
-
         return context
 
 
@@ -85,7 +82,7 @@ class SalaoList(LoginRequiredMixin, ListView):
 
 class ServicoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
-    paginate_by = 6
+    #paginate_by = 6
     model = Servico
     template_name = 'servicos/listarServicos.html'
 
@@ -95,8 +92,7 @@ class ServicoList(LoginRequiredMixin, ListView):
         id_estabelecimento = self.kwargs.get("pk")
         if id_estabelecimento:
             self.estabelecimento = get_object_or_404(Salao, id=id_estabelecimento)
-            queryset = queryset.filter(estabelecimento=self.estabelecimento)
-            print(queryset)
+            queryset = queryset.filter(estabelecimento=self.estabelecimento).order_by("id")
         return queryset
 
 
@@ -109,5 +105,4 @@ class SaloesDetail(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(SaloesDetail, self).get_context_data(*args, **kwargs)
-        print(context)
         return context

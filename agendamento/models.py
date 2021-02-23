@@ -12,10 +12,19 @@ class Agendamento(TimeStampedModel):
     )
     data = models.DateField()
     hora = models.TimeField()
-    tempo = models.TimeField()
+    tempoASerGasto = models.TimeField(verbose_name='tempo gasto no atendimento')
     estado = models.CharField(max_length=1, choices=ESTADOS, default='E')
-    servico = models.ForeignKey(Servico, verbose_name='Serviço', on_delete=models.CASCADE)
+    servico = models.ManyToManyField(Servico, through="AgendamentoServico")
     cliente = models.ForeignKey('accounts.User', verbose_name='Cliente', on_delete=models.CASCADE)
+    totalAPagar = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='preçoTotal')
 
     class Meta:
         ordering = ("data",)
+
+    def __str__(self):
+        return "{} - {}".format(self.data, self.cliente.email)
+
+
+class AgendamentoServico(models.Model):
+    servico = models.ForeignKey(Servico, on_delete=models.CASCADE, related_name="servicoAgendam")
+    agendamento = models.ForeignKey(Agendamento, on_delete=models.CASCADE, related_name="servicoAgendam")

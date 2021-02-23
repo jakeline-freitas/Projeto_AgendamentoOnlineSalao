@@ -6,11 +6,12 @@
 
 {% block conteudo %}
 
-<h3>Agendamento</h3>
 
-<hr>
 <div class="row">
     <div class="col-md-6 mx-auto">
+        <h3>Agendamento</h3>
+
+        <hr>
         <form method="post" action="">
             {% csrf_token %}
             {{ form|crispy }}

@@ -23,7 +23,7 @@
                         <a class="text-decoration-none " style="color: #c81e5c" href="{{ product.get_absolute_url }}">
                             <h5 class="card-title">{{ product.nome }}</h5>
                         </a>
-                        <a href="{% url 'listarServicosId' product.id %}" class="btn dropdown-item lead mr-4 font-weight-light" style="background-color: #c81e5c; color:#fff">Go somewhere</a>
+                        <a href="{% url 'agendamento' product.id %}" class="btn dropdown-item lead mr-4 font-weight-light" style="background-color: #c81e5c; color:#fff">Go somewhere</a>
 
                     </div>
                 </div>

@@ -1,10 +1,14 @@
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView
 from django.views.generic.list import ListView
 
+from servicos.models import Servico, Salao
 from .forms import AgendamentoForm
-from .models import Agendamento
+from .models import Agendamento, AgendamentoServico
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 ####### Create #########
 
@@ -16,6 +20,31 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
     template_name = 'agendamento/FormCreate.html'
     success_url = reverse_lazy('listarSaloes')
 
+    def get_context_data(self, **kwargs):
+        id_estabelecimento = self.kwargs.get("pk")
+        context = super(AgendamentoCreate, self).get_context_data(**kwargs)
+        context['form'].fields['servico'].queryset = Servico.Servicos.filter(estabelecimento=id_estabelecimento)
+        return context
+
+    def form_valid(self, form):
+
+        self.object = form.save(commit=False)
+        self.object.cliente = self.request.user
+
+        servicos = list(form.cleaned_data["servico"])
+        valor = 0
+        for ser in servicos:
+            valor += ser.preco
+
+        self.object.save()
+        registro = form.save()
+
+        for serv in servicos:
+            agendamentoServico = AgendamentoServico(servico=serv, agendamento=registro)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+
 ####### List #########
 
 
@@ -26,7 +55,6 @@ class AgendamentoList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(AgendamentoList, self).get_context_data(*args, **kwargs)
-        print(context)
         return context
 
 

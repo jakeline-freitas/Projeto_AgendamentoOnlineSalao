@@ -12,6 +12,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  <th scope="col">#</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Preço</th>
                   <th scope="col">Descrição</th>
@@ -19,18 +20,28 @@
                 </tr>
               </thead>
               <tbody>
+              {% if servico_list %}
                 {% for servico in servico_list %}
                     <tr>
+                        <td><input type="checkbox"  id="{{ servico.id }}"></td>
                         <td>{{ servico.nome }}</td>
                         <td>{{ servico.preco }}</td>
                         <td>{{ servico.descricao }}</td>
 
                     </tr>
-                {% empty %}
-                    <tr>
-                      <td colspan="4">Nenhum Serviço</td>
-                    </tr>
                 {% endfor %}
+                    <tr>
+
+                      <td colspan="4" style="text-align: right;">
+                          <button type="button" class="btn btn-info">Agendar</button>
+                      </td>
+
+                    </tr>
+              {% else %}
+                 <tr>
+                    <td colspan="4">Nenhum Serviço</td>
+                 </tr>
+              {% endif %}
               </tbody>
             </table>
         </div>
