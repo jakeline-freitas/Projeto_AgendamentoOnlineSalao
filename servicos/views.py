@@ -6,13 +6,15 @@ from .forms import ServicoForm
 from .models import Servico, Salao
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import GroupRequiredMixin
 
 
 ####### Create #########
 
 
-class ServicosCreate(LoginRequiredMixin, CreateView):
+class ServicosCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Servico
+    group_required = u"Proprietários"
     fields = '__all__'
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')
@@ -21,12 +23,13 @@ class ServicosCreate(LoginRequiredMixin, CreateView):
         context = super(ServicosCreate, self).get_context_data(**kwargs)
         #estabelecimento = Salao.objects.filter(responsavel= self.request.user)
         #estabelecimentos = [estabelecimento for estabelecimento in Salao.objects.filter(responsavel=self.request.user)]
-        context['form'].fields['estabelecimento'].queryset = Salao.objects.filter(responsavel= self.request.user)
+        context['form'].fields['estabelecimento'].queryset = Salao.objects.filter(responsavel=self.request.user)
         return context
 
 
-class SalaoCreate(LoginRequiredMixin, CreateView):
+class SalaoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Salao
+    group_required = u"Proprietários"
     fields = ['nome', 'image', 'localizacao']
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')
@@ -79,12 +82,17 @@ class SalaoList(LoginRequiredMixin, ListView):
     model = Salao
     template_name = 'servicos/listarSaloes.html'
 
+    def get_queryset(self):
+        return Salao.objects.all().order_by('nome')
+
 
 class ServicoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
-    #paginate_by = 6
+    paginate_by = 6
     model = Servico
     template_name = 'servicos/listarServicos.html'
+
+
 
     def get_queryset(self):
         queryset = Servico.available.all()
@@ -92,7 +100,7 @@ class ServicoList(LoginRequiredMixin, ListView):
         id_estabelecimento = self.kwargs.get("pk")
         if id_estabelecimento:
             self.estabelecimento = get_object_or_404(Salao, id=id_estabelecimento)
-            queryset = queryset.filter(estabelecimento=self.estabelecimento).order_by("id")
+            queryset = queryset.filter(estabelecimento=self.estabelecimento)
         return queryset
 
 

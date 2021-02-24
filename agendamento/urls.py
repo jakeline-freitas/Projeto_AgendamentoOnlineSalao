@@ -6,6 +6,5 @@ from .views import AgendamentoList
 
 urlpatterns = [
     path('agendar/<int:pk>', AgendamentoCreate.as_view(), name="agendamento"),
-    #path('listarAgendamentos/<int:pk>', AgendamentoList.as_view(), name="listarAgendamentos"),
     path('listarAgendamentos/', AgendamentoList.as_view(), name="listarAgendamentos"),
 ]

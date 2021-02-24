@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # bootstrap
     'crispy_forms',
+    #api
+    'api.apps.ApiConfig',
+    'rest_framework',
     # local apps
     'accounts.apps.AccountsConfig',
     'paginas.apps.PaginasConfig',
     'agendamento.apps.AgendamentoConfig',
     'servicos.apps.ServicosConfig',
+    'Utils',
+
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -71,6 +76,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'my_customer_tags': 'servicos.templatetags.saloes_tags',
+
 
             }
         },

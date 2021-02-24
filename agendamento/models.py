@@ -12,7 +12,7 @@ class Agendamento(TimeStampedModel):
     )
     data = models.DateField()
     hora = models.TimeField()
-    tempoASerGasto = models.TimeField(verbose_name='tempo gasto no atendimento')
+    tempo = models.TimeField(verbose_name='tempo gasto no atendimento')
     estado = models.CharField(max_length=1, choices=ESTADOS, default='E')
     servico = models.ManyToManyField(Servico, through="AgendamentoServico")
     cliente = models.ForeignKey('accounts.User', verbose_name='Cliente', on_delete=models.CASCADE)

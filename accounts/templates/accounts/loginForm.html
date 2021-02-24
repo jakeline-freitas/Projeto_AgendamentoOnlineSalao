@@ -6,15 +6,29 @@
 {% block conteudo %}
 
 <div class="row">
-    <div class="col-md-4 mx-auto">
-        <h3>Login</h3>
-        <hr>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-secondary">Entrar</button>
-        </form>
-    </div>
+
+        {% if request.user.is_authenticated%}
+            <div class="container m-3">
+                <div class="alert alert-warning" role="alert">
+                  <h4 class="alert-heading">Ação não permitida!</h4>
+                  <p>Houve algum problema para processar a ação desejada ou você não tem permissão para isso</p>
+                  <hr>
+                  <p class="mb-0">Realize o login de Administrador.</p>
+                </div>
+            </div>
+
+        {% else %}
+            <div class="col-md-4 mx-auto">
+                <h3>Login</h3>
+                <hr>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-secondary">Entrar</button>
+                </form>
+            </div>
+        {% endif %}
+
 </div>
 
 

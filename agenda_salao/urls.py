@@ -22,9 +22,12 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("paginas.urls")),
+    path('api/', include('api.urls')),
     path('accounts/', include('accounts.urls')),
     path('agendamento/', include('agendamento.urls')),
     path('servicos/', include('servicos.urls')),
+
+
 
 ]
 if settings.DEBUG:

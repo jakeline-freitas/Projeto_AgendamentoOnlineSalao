@@ -23,7 +23,7 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         id_estabelecimento = self.kwargs.get("pk")
         context = super(AgendamentoCreate, self).get_context_data(**kwargs)
-        context['form'].fields['servico'].queryset = Servico.Servicos.filter(estabelecimento=id_estabelecimento)
+        context['form'].fields['servico'].queryset = Servico.Servicos.filter(estabelecimento=id_estabelecimento).order_by("nome")
         return context
 
     def form_valid(self, form):
@@ -35,6 +35,8 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
         valor = 0
         for ser in servicos:
             valor += ser.preco
+
+        self.object.totalAPagar = valor
 
         self.object.save()
         registro = form.save()
@@ -52,6 +54,11 @@ class AgendamentoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
     model = Agendamento
     template_name = 'agendamento/Lista.html'
+
+    def get_queryset(self):
+        usuario = self.request.user
+        queryset = Agendamento.objects.filter(cliente=usuario)
+        return queryset
 
     def get_context_data(self, *args, **kwargs):
         context = super(AgendamentoList, self).get_context_data(*args, **kwargs)
