@@ -1,0 +1,52 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block title %}Listar{% endblock title %}
+
+{% block conteudo %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h3>Agendamentos dos Seus Estabelecimentos</h3>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Agendamento</th>
+                  <th scope="col">Serviço</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Confime</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for age in object_list %}
+                    <tr>
+                        <td>{{ age.agendamento }}</td>
+                        <td>{{ age.servico }}</td>
+                        <td>
+                            {% if age.agendamento.estado == 'E' %}
+                                <span class="badge badge-primary">Esperando</span>
+                            {% elif age.agendamento.estado == 'A' %}
+                                <span class="badge badge-success">Agendado</span>
+                            {% else %}
+                                <span class="badge badge-danger">Cancelado</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a type="button" href="{% url 'updateAgendamento' age.agendamento.id %}" class="btn btn-light"><i class="far fa-calendar-check"></i></a>
+
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                      <td colspan="4">Nenhum agendamento</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

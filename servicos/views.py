@@ -29,7 +29,7 @@ class ServicosCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 class SalaoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
     model = Salao
-    group_required = u"Proprietários"
+    group_required = [u"Proprietários", u"Adminstrador"]
     fields = ['nome', 'image', 'localizacao']
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')

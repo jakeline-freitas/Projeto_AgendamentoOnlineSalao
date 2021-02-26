@@ -3,6 +3,11 @@
 
 {% load crispy_forms_tags %}
 
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{{ form.media }}
+
 {% block conteudo %}
 
 <div class="row">
@@ -18,14 +23,23 @@
             </div>
 
         {% else %}
-            <div class="col-md-4 mx-auto">
-                <h3>Login</h3>
-                <hr>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit" class="btn btn-secondary">Entrar</button>
-                </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto m-3">
+                    <div class="card card-login mx-auto text-center bg-light mb-3">
+                        <div class="card-header mx-auto bg-light">
+                            <span><i class="far fa-user fa-3x"></i> </span><br/>
+
+                        </div>
+                        <div class="card-body ">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form %}
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endif %}
 

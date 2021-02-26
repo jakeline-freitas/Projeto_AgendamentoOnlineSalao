@@ -8,7 +8,7 @@ class Salao(models.Model):
     localizacao = models.TextField(verbose_name='Localização')
     responsavel = models.ForeignKey('accounts.User', verbose_name='Responsável', on_delete=models.CASCADE)
 
-    #saloes = models.Manager()
+    # saloes = models.Manager()
 
     class Meta:
         verbose_name = "salão"
@@ -39,4 +39,4 @@ class Servico(models.Model):
         verbose_name_plural = "serviços"
 
     def __str__(self):
-        return self.nome
+        return "{} - {}".format(self.nome, self.preco)

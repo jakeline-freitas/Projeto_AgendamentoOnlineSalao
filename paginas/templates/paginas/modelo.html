@@ -39,7 +39,7 @@
                       <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c" href="{% url 'cadastrarSalao' %}">Cadatrar de Salões</a>
                       <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c" href="{% url 'cadastrarServico' %}">Cadatrar serviços</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c" href="{% url 'listarTodosAgendamentos' %}">Agendamentos do Salão</a>
                     </div>
                   </li>
                 </li>
@@ -71,12 +71,12 @@
     {% endblock %}
     </div>
 
-    <div class="" style="background-color: #8a004b">
-      {% block destaque %}
-       blll
-      {% endblock %}
+<!--    <div class="" style="background-color: #8a004b">-->
+<!--      {% block destaque %}-->
+<!--       blll-->
+<!--      {% endblock %}-->
 
-    </div>
+<!--    </div>-->
 
     <div class="container">
       {% block conteudo %}
@@ -91,7 +91,9 @@
 
     </div>
 
-      {% block js %} {% endblock %}
+
+    {% block js %} {% endblock %}
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

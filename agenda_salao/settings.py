@@ -36,10 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # bootstrap
+    'bootstrap4',
     'crispy_forms',
+
+
     #api
     'api.apps.ApiConfig',
     'rest_framework',
+    'drf_yasg', #documentação
+
     # local apps
     'accounts.apps.AccountsConfig',
     'paginas.apps.PaginasConfig',
@@ -49,6 +54,10 @@ INSTALLED_APPS = [
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,3 +164,10 @@ AUTH_USER_MODEL = "accounts.User"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR / "media")
+
+# Email
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '84877a9c99a203'
+EMAIL_HOST_PASSWORD = '760a1e1c2480a6'
+EMAIL_PORT = '2525'

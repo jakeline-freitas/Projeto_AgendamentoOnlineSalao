@@ -22,7 +22,7 @@ class Agendamento(TimeStampedModel):
         ordering = ("data",)
 
     def __str__(self):
-        return "{} - {}".format(self.data, self.cliente.email)
+        return "{} - {} - {}".format(self.data, self.hora, self.cliente.email)
 
 
 class AgendamentoServico(models.Model):
