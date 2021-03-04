@@ -1,8 +1,55 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 body {
     overflow-y: overlay !important;
     overflow-x: hidden;
     overflow-wrap: break-word;
+	padding: 0 !important;
 }
+div #main{
+  /** Essa margem vai evitar que o conteudo fique por baixo do rodapé **/
+
+	/*margin-bottom: 200px;*/
+
+}
+/*.page-content-wrappe{*/
+/*	*/
+/*}*/
 .dropdown:hover>.dropdown-menu {
      display: block;
+
+}
+/*.menu-proprietario a:hover{*/
+/*    background-color: #d98cac;*/
+/*    color: #FFFFFF;*/
+/*}*/
+#main {
+    margin-top: 80px;
+}
+nav .container {
+  margin-top: 0;
+}
+button.botao:hover{
+    background-color: #9b1735;
+    border-color: #c81e5c;
+}
+button.botao{
+    background-color: #c81e5c;
+    border-color: #c81e5c;
+}
+/*footer*/
+
+footer{
+	background-color:#222222;
+}
+
+
+/*login*/
+
+#pagina-login{
+	background: url('/static/img/607.jpg');
+	background-size: 600px;
 }

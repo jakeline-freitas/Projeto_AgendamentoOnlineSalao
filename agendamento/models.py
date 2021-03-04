@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
+
+from agendamento.enviarEmail import EnviarEmail
 from servicos.models import Servico
 
 
@@ -23,6 +25,11 @@ class Agendamento(TimeStampedModel):
 
     def __str__(self):
         return "{} - {} - {}".format(self.data, self.hora, self.cliente.email)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            EnviarEmail(self.cliente.username, self.estado, self.cliente)
+            super(Agendamento, self).save(*args, **kwargs)
 
 
 class AgendamentoServico(models.Model):

@@ -1,0 +1,29 @@
+
+{% extends "mail_templated/base.tpl" %}
+
+
+{% block subject %}
+    Agendamentos em Salões de Beleza
+{% endblock %}
+
+{% block html %}
+    <br>
+    <h1>Sistema Style Online</h1>
+    <h5>Agendamentos Onlines em salões de Beleza</h5>
+    <p>Olá, {{ usuario }}!</p>
+    <p>Seu agendamento foi
+        {% if agendamento == 'A'%}
+        <strong>Agendado.</strong>
+        {% elif agendamento == 'C' %}
+        <strong>Cancelado.</strong>
+        {% else%}
+        para <strong>Espera.</strong>
+        {% endif %}
+    </p>
+
+    <br>
+    <p>***** MENSAGEM GERADA AUTOMATICAMENTE. NÃO RESPONDA. *****</p>
+    <br>
+    <hr>
+    <p><small>Desenvolvido pelo Disciplina de Desenvolvimento de Sistemas Corporativos</small></p>
+{% endblock %}

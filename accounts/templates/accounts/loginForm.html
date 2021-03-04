@@ -1,5 +1,5 @@
 {% extends 'paginas/modelo.html' %}
-{% load static%}
+{% load static %}
 
 {% load crispy_forms_tags %}
 
@@ -8,44 +8,50 @@
 {% bootstrap_javascript jquery='full' %}
 {{ form.media }}
 
-{% block conteudo %}
+{% block title %}Login{% endblock title %}
 
-<div class="row">
+{% block conteudo %}
+<div class="container" id="pagina-login" >
+    <div class="row">
 
         {% if request.user.is_authenticated%}
-            <div class="container m-3">
-                <div class="alert alert-warning" role="alert">
-                  <h4 class="alert-heading">Ação não permitida!</h4>
-                  <p>Houve algum problema para processar a ação desejada ou você não tem permissão para isso</p>
-                  <hr>
-                  <p class="mb-0">Realize o login de Administrador.</p>
-                </div>
+        <div class="container m-3">
+            <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading">Ação não permitida!</h4>
+                <p>Houve algum problema para processar a ação desejada ou você não tem permissão para isso</p>
+                <hr>
+                <p class="mb-0">Realize o login com e-mail autorizado.</p>
             </div>
+        </div>
 
         {% else %}
-        <div class="container">
+        <div class="container" id="card-login">
             <div class="row">
-                <div class="col-md-4 mx-auto m-3">
-                    <div class="card card-login mx-auto text-center bg-light mb-3">
-                        <div class="card-header mx-auto bg-light">
-                            <span><i class="far fa-user fa-3x"></i> </span><br/>
+                <div class="col-md-4 mx-auto mt-3">
+                    <div class="card card-login mx-auto text-center bg-light mb-4 shadow rounded">
+                        <div class="card-header mx-auto m-3 bg-light">
+                            <span><i class="far fa-user fa-3x" style="color: #c81e5c"></i></span><br/>
+                            <span style="color: #c81e5c">Faça seu Login</span>
 
                         </div>
                         <div class="card-body ">
                             <form action="" method="post">
                                 {% csrf_token %}
                                 {% bootstrap_form form %}
-                                <button type="submit" class="btn btn-primary">Entrar</button>
+                                <button type="submit" class="btn" style="background-color: #c81e5c; color: #FFFFFF">
+                                    Entrar
+                                </button>
+                                <a type="button" href="{% url 'signup' %}" class="btn btn-dark">Cadastre-se</a>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         {% endif %}
 
+    </div>
 </div>
-
-
 {% endblock %}
-
-
+{% block footer %}
+{% endblock %}

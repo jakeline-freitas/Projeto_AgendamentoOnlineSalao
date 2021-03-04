@@ -15,15 +15,15 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
+        <div class="card card-signin my-4 bg-light">
           <div class="card-body">
-            <h5 class="card-title text-center">Cadastre-se</h5>
+            <h5 class="card-title text-center font-weight-bold" style="color: #c81e5c">Cadastre-se</h5>
               <form method="post">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                 <button class="btn btn-md btn-primary btn-block btn-login font-weight-bold mb-2" type="submit">Cadastrar</button>
+                 <button class="btn btn-md btn-block btn-login font-weight-bold mb-2" style="background-color: #c81e5c; color: #FFFFFF" type="submit">Cadastrar</button>
               </form>
-              <p class="change-form-p">Já possui uma conta? <a href="/accounts/login">Clique aqui!</a></p>
+              <p class="change-form-p">Já possui uma conta? <a href="{% url 'login' %}" style="color: #8a004b">Clique aqui!</a></p>
           </div>
         </div>
       </div>

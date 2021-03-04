@@ -35,10 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #email
+    'mail_templated',
     # bootstrap
     'bootstrap4',
     'crispy_forms',
-
 
     #api
     'api.apps.ApiConfig',
@@ -83,11 +84,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            'libraries': {
-                'my_customer_tags': 'servicos.templatetags.saloes_tags',
-
-
-            }
+            # 'libraries': {
+            #     'my_customer_tags': 'servicos.templatetags.saloes_tags',
+            #
+            #
+            # }
         },
     },
 ]

@@ -4,13 +4,11 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
 
 from servicos.models import Servico, Salao
-from accounts.models import User
 from .forms import AgendamentoForm
 from .models import Agendamento, AgendamentoServico
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.core.mail import send_mail
 
 
 ####### Create #########
@@ -95,22 +93,15 @@ class AgendamentoServicoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateVie
     template_name = 'agendamento/Update.html'
     success_url = reverse_lazy('listarTodosAgendamentos')
 
-    def form_valid(self, form):
-        #id_agendamento = self.kwargs.get("pk")
-        usuario = self.request.user
-        emailU = usuario.email
-        #emailCliente = [age.cliente for age in Agendamento.objects.filter(id=id_agendamento)]
+    # def form_valid(self, form):
+    #     id_agendamento = self.kwargs.get("pk")
+    #     usuario = self.request.user
+    #     emailU = usuario.email
+    #     emailCliente = [age.cliente for age in Agendamento.objects.filter(id=id_agendamento)]
+    #
+    #
+    #     return super().form_valid(form)
 
-
-        send_mail(
-            'Agendamento',
-            'teste msg 2.',
-             emailU,
-            ['to@example.com'],
-            fail_silently=False,
-        )
-
-        return super().form_valid(form)
 
 class AgendamentoDetail(LoginRequiredMixin, DetailView):
     template_name = "products/detail.html"
