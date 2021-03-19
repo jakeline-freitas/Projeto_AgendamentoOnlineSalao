@@ -1,5 +1,6 @@
 from braces.views import GroupRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
 
@@ -30,24 +31,28 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
 
-        self.object = form.save(commit=False)
-        self.object.cliente = self.request.user
-
+        agendamento = form.save(commit=False)
+        agendamento.cliente = self.request.user
+        agendamento.totalAPagar = 0
+        agendamento.save()
+        print(agendamento.id)
         servicos = list(form.cleaned_data["servico"])
         valor = 0
         for ser in servicos:
             valor += ser.preco
+            agendamento.servico.add(ser)
 
-        self.object.totalAPagar.add(valor)
+        agendamento.totalAPagar=valor
 
-        self.object.save()
-        registro = form.save()
+        agendamento= form.save()
+        print("******")
+        print(agendamento.id)
 
-        for serv in servicos:
-            agendamentoServico = AgendamentoServico(servico=serv, agendamento=registro)
-            agendamentoServico.save()
+        # for serv in servicos:
+        #     agendamentoServico = AgendamentoServico(servico=serv, agendamento=agendamento)
+        #     # agendamentoServico.save()
 
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect("/agendamento/listarAgendamentos/")
 
 
 ####### List #########

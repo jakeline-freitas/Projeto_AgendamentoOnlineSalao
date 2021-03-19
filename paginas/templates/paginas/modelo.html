@@ -31,7 +31,22 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item ">
+                    <li class="nav-item dropdown mr-4">
+                        <a class="nav-link dropdown-toggle lead mr-4 font-weight-light" style="color: #c81e5c" href="#"
+                           id="navbarDropdownRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            Relatórios
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownRelatorio">
+                            <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c"
+                               href="{% url 'gerar_relatorio' %}"><i class="fas fa-clipboard-check"></i> Relatório do dia
+                            </a>
+                            <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c"
+                               href="#"><i class="fas fa-clipboard-list"></i> Relatório do Mês</a>
+                            <div class="dropdown-divider"></div>
+
+                        </div>
+                    </li>
                     <li class="nav-item dropdown mr-4">
                         <a class="nav-link dropdown-toggle lead mr-4 font-weight-light" style="color: #c81e5c" href="#"
                            id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -50,7 +65,7 @@
                                 Agendamentos do Salão</a>
                         </div>
                     </li>
-                    </li>
+
 
                     {% endif %}
                     <li class="nav-item">

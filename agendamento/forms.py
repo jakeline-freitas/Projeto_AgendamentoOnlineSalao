@@ -15,7 +15,7 @@ class TimeInput(forms.DateInput):
 class AgendamentoForm(ModelForm):
     class Meta:
         model = Agendamento
-        fields = ['data', 'hora', 'tempo']
+        fields = ['data', 'hora', 'tempo', 'servico']
         widgets = {
             'data': DateInput(),
             'hora': TimeInput(),
@@ -23,6 +23,6 @@ class AgendamentoForm(ModelForm):
         }
 
     servico = forms.ModelMultipleChoiceField(
-        queryset=Servico.Servicos.all(),
-        widget=forms.CheckboxSelectMultiple
-    )
+            queryset=Servico.Servicos.all(),
+            widget=forms.CheckboxSelectMultiple
+        )

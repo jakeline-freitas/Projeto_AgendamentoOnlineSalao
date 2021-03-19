@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     #email
     'mail_templated',
     # bootstrap
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'paginas.apps.PaginasConfig',
     'agendamento.apps.AgendamentoConfig',
     'servicos.apps.ServicosConfig',
+    'relatorios.apps.RelatoriosConfig',
     'Utils',
 
 ]
