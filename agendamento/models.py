@@ -10,6 +10,12 @@ class ScheduledManager(models.Manager):  # personalizando novo manager
     def get_queryset(self):
         return super().get_queryset().filter(estado__in=['A', 'E'])  # filtro para serviços disponiveis
 
+
+class ScheduledServiceManager(models.Manager):  # personalizando novo manager
+    def get_queryset(self):
+        return super().get_queryset().filter(agendamento__estado__in=['A', 'E'])  # filtro para serviços disponiveis
+
+
 class Agendamento(TimeStampedModel):
     ESTADOS = (
         ('A', 'Agendado'),
@@ -20,7 +26,7 @@ class Agendamento(TimeStampedModel):
     hora = models.TimeField()
     tempo = models.TimeField(verbose_name='tempo gasto no atendimento')
     estado = models.CharField(max_length=1, choices=ESTADOS, default='E')
-    servico = models.ManyToManyField(Servico, through="AgendamentoServico", null=True)
+    servico = models.ManyToManyField(Servico, through="AgendamentoServico")
     cliente = models.ForeignKey('accounts.User', verbose_name='Cliente', on_delete=models.CASCADE)
     totalAPagar = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='preçoTotal')
 
@@ -44,3 +50,4 @@ class AgendamentoServico(models.Model):
     agendamento = models.ForeignKey(Agendamento, on_delete=models.CASCADE, related_name="servicoAgendam")
 
     objects = models.Manager()
+    scheduledServiceManager = ScheduledServiceManager()

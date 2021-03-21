@@ -31,6 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
+                    {% if user.groups.all.0.name == "Proprietários" %}
                     <li class="nav-item dropdown mr-4">
                         <a class="nav-link dropdown-toggle lead mr-4 font-weight-light" style="color: #c81e5c" href="#"
                            id="navbarDropdownRelatorio" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -39,10 +40,11 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownRelatorio">
                             <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c"
-                               href="{% url 'gerar_relatorio' %}"><i class="fas fa-clipboard-check"></i> Relatório do dia
+                               href="{% url 'gerar_relatorio' %}" target="_blank"><i class="fas fa-clipboard-check"></i> Relatório do
+                                dia
                             </a>
                             <a class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c"
-                               href="#"><i class="fas fa-clipboard-list"></i> Relatório do Mês</a>
+                               href="{% url 'gerar_relatorio_intervalo' %}"><i class="fas fa-clipboard-list"></i> Relatório entre datas</a>
                             <div class="dropdown-divider"></div>
 
                         </div>
@@ -68,6 +70,7 @@
 
 
                     {% endif %}
+                    {% endif %}
                     <li class="nav-item">
                     <li class="nav-item dropdown mr-4">
                         <a class="nav-link dropdown-toggle lead mr-4 font-weight-light" style="color: #c81e5c" href="#"
@@ -81,10 +84,13 @@
                         </a>
                         <div class="dropdown-menu " aria-labelledby="navbarDropdownMenuLink">
                             {% if request.user.is_authenticated %}
+                            {% if user.groups.all.0.name == "Clientes" %}
                             <a href="{% url 'listarAgendamentos' %}"
                                class="btn dropdown-item lead mr-4 font-weight-light" style="color: #c81e5c"><i
                                     class="far fa-calendar-alt"></i> Meus Agendamentos</a>
                             <div class="dropdown-divider"></div>
+                            {% endif %}
+
                             <a href="{% url 'logout' %}"
                                class="btn dropdown-item lead mr-4 font-weight-light fas fa-sign-out>"
                                style="color: #c81e5c"><i class="fas fa-sign-out-alt"></i>Sair</a>

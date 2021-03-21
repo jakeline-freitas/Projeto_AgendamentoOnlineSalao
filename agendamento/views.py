@@ -85,7 +85,7 @@ class TodosAgendamentosList(GroupRequiredMixin, LoginRequiredMixin, ListView):
 
         servicos = [servico.id for servico in Servico.Servicos.filter(estabelecimento__in=saloes)]
 
-        queryset = AgendamentoServico.objects.filter(servico__in=servicos)
+        queryset = AgendamentoServico.scheduledServiceManager.filter(servico__in=servicos)
         return queryset
 
 #-------------Update --------------------
