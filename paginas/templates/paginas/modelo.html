@@ -14,9 +14,9 @@
 
     <title>{% block title %}Home{% endblock title %}</title>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
 
-<div class="page-content-wrappe container-fluid px-0">
+<div class="d-flex flex-column min-vh-100 contex">
     <!--    navbar-->
     {% block menu %}
     <nav class="navbar fixed-top navbar-expand-lg border-bottom navbar-light bg-light">
@@ -109,7 +109,7 @@
     {% endblock %}
 
     <!--  conteúdo central-->
-    <div class="row">
+    <div class="container-fluid">
         <div class="container mb-3" id="main">
 
             {% block conteudo %}

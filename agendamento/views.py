@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DetailView, UpdateView
 from django.views.generic.list import ListView
 
 from servicos.models import Servico, Salao
+from .enviarEmail import EnviarEmail
 from .forms import AgendamentoForm
 from .models import Agendamento, AgendamentoServico
 from django.urls import reverse_lazy
@@ -35,7 +36,7 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
         agendamento.cliente = self.request.user
         agendamento.totalAPagar = 0
         agendamento.save()
-        print(agendamento.id)
+
         servicos = list(form.cleaned_data["servico"])
         valor = 0
         for ser in servicos:
@@ -45,8 +46,7 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
         agendamento.totalAPagar=valor
 
         agendamento= form.save()
-        print("******")
-        print(agendamento.id)
+
 
         # for serv in servicos:
         #     agendamentoServico = AgendamentoServico(servico=serv, agendamento=agendamento)
@@ -61,12 +61,12 @@ class AgendamentoCreate(LoginRequiredMixin, CreateView):
 class AgendamentoList(GroupRequiredMixin, LoginRequiredMixin, ListView):
     group_required = u"Clientes"
     login_url = reverse_lazy('login')
-    model = Agendamento
+    model = AgendamentoServico
     template_name = 'agendamento/Lista.html'
 
     def get_queryset(self):
         usuario = self.request.user
-        queryset = Agendamento.objects.filter(cliente=usuario)
+        queryset = AgendamentoServico.objects.filter(agendamento__cliente=usuario)
         return queryset
 
     def get_context_data(self, *args, **kwargs):
@@ -97,15 +97,6 @@ class AgendamentoServicoUpdate(GroupRequiredMixin, LoginRequiredMixin, UpdateVie
     fields = ['estado']
     template_name = 'agendamento/Update.html'
     success_url = reverse_lazy('listarTodosAgendamentos')
-
-    # def form_valid(self, form):
-    #     id_agendamento = self.kwargs.get("pk")
-    #     usuario = self.request.user
-    #     emailU = usuario.email
-    #     emailCliente = [age.cliente for age in Agendamento.objects.filter(id=id_agendamento)]
-    #
-    #
-    #     return super().form_valid(form)
 
 
 class AgendamentoDetail(LoginRequiredMixin, DetailView):

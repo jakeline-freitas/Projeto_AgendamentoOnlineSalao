@@ -15,19 +15,23 @@
                   <th scope="col">Data</th>
                   <th scope="col">Hora</th>
                   <th scope="col">Tempo</th>
+                  <th scope="col">Salão</th>
+                  <th scope="col">Servico</th>
                   <th scope="col">Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {% for age in object_list %}
                     <tr>
-                        <td>{{ age.data }}</td>
-                        <td>{{ age.hora }}</td>
-                        <td>{{ age.tempo }}</td>
+                        <td>{{ age.agendamento.data }}</td>
+                        <td>{{ age.agendamento.hora }}</td>
+                        <td>{{ age.agendamento.tempo }}</td>
+                        <td>{{ age.servico.estabelecimento }}</td>
+                        <td>{{ age.servico.nome }}</td>
                         <td>
-                            {% if age.estado == 'E' %}
+                            {% if age.agendamento.estado == 'E' %}
                                 <span class="badge badge-primary">Esperando</span>
-                            {% elif age.estado == 'A' %}
+                            {% elif age.agendamento.estado == 'A' %}
                                 <span class="badge badge-success">Agendado</span>
                             {% else %}
                                 <span class="badge badge-danger">Cancelado</span>

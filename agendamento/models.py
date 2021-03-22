@@ -39,10 +39,12 @@ class Agendamento(TimeStampedModel):
     def __str__(self):
         return "{} - {} - {}".format(self.data, self.hora, self.cliente.email)
 
-    # def save(self, *args, **kwargs):
-    #     if self.pk:
-    #         EnviarEmail(self.cliente.username, self.estado, self.cliente)
-    #         super(Agendamento, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        if self.pk:
+            EnviarEmail(self.cliente.username, self.estado, self.cliente)
+            super(Agendamento, self).save(*args, **kwargs)
+        if not self.pk:
+            super(Agendamento, self).save(*args, **kwargs)
 
 
 class AgendamentoServico(models.Model):
