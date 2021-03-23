@@ -16,7 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 ####### Create #########
 
 
-class AgendamentoCreate(LoginRequiredMixin, CreateView):
+class AgendamentoCreate(CreateView):
     login_url = reverse_lazy('login')
     model = Agendamento
     form_class = AgendamentoForm
