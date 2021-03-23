@@ -6,7 +6,7 @@
 {% block conteudo %}
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h3>Lista de Serviços</h3>
+        <h3>Lista de Salões</h3>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -14,24 +14,20 @@
                 <tr>
 
                     <th scope="col">Nome</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Salão</th>
+                    <th scope="col">Localização</th>
                     <th scope="col" class="text-center"><i class="fas fa-cogs"></i></th>
 
                 </tr>
                 </thead>
                 <tbody>
-                {% if servico_list %}
-                {% for servico in servico_list %}
+                {% if salao_list %}
+                {% for salao in salao_list %}
                 <tr>
 
-                    <td>{{ servico.nome }}</td>
-                    <td>{{ servico.preco }}</td>
-                    <td>{{ servico.descricao }}</td>
-                    <td>{{ servico.estabelecimento }}</td>
+                    <td>{{ salao.nome }}</td>
+                    <td>{{ salao.localizacao }}</td>
                     <td class="project-actions text-center">
-                        <a class="btn btn-info btn-sm" href="{% url 'editarServico' servico.id %}">
+                        <a class="btn btn-info btn-sm" href="{% url 'editarSalao' salao.id %}">
                             <i class="fas fa-pencil-alt">
                             </i>
                             Editar

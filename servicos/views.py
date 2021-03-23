@@ -46,14 +46,15 @@ class SalaoCreate(GroupRequiredMixin, LoginRequiredMixin, CreateView):
 
 class ServicosUpdate(LoginRequiredMixin, UpdateView):
     model = Servico
-    fields = ['preco', 'descricao', 'is_available']
+    form_class = ServicoForm
+    # fields = ['preco', 'descricao', 'is_available']
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')
 
 
 class SalaoUpdate(LoginRequiredMixin, UpdateView):
     model = Salao
-    fields = '__all__'
+    fields = ['nome', 'image', 'localizacao']
     template_name = 'servicos/formularioCreate.html'
     success_url = reverse_lazy('index')
 
@@ -86,21 +87,26 @@ class SalaoList(LoginRequiredMixin, ListView):
         return Salao.objects.all().order_by('nome')
 
 
+class SalaoListUser(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    model = Salao
+    template_name = 'servicos/listarSaloesTabela.html'
+
+    def get_queryset(self):
+        queryset = Salao.objects.filter(responsavel=self.request.user).order_by('nome')
+        return queryset
+
+
 class ServicoList(LoginRequiredMixin, ListView):
     login_url = reverse_lazy('login')
-    paginate_by = 6
     model = Servico
     template_name = 'servicos/listarServicos.html'
 
-
-
     def get_queryset(self):
         queryset = Servico.available.all()
+        salao = Salao.objects.filter(responsavel=self.request.user)
 
-        id_estabelecimento = self.kwargs.get("pk")
-        if id_estabelecimento:
-            self.estabelecimento = get_object_or_404(Salao, id=id_estabelecimento)
-            queryset = queryset.filter(estabelecimento=self.estabelecimento)
+        queryset = queryset.filter(estabelecimento__in=salao)
         return queryset
 
 
@@ -109,7 +115,7 @@ class ServicoList(LoginRequiredMixin, ListView):
 
 class SaloesDetail(DetailView):
     queryset = Salao.objects.all()
-    template_name = 'servicos/detalheSaloes.html'
+    template_name = 'servicos/listarSaloesTabela.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super(SaloesDetail, self).get_context_data(*args, **kwargs)
