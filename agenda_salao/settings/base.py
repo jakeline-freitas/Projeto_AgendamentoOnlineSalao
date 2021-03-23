@@ -180,6 +180,3 @@ EMAIL_HOST_PASSWORD = '760a1e1c2480a6'
 EMAIL_PORT = '2525'
 
 DISABLE_COLLECTSTATIC=1
-# Configure o aplicativo Django para Heroku.
-import django_heroku
-django_heroku.settings (locals ())
